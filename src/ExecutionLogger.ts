@@ -1,6 +1,7 @@
+import {MessagesBuffer} from "./MessagesBuffer";
+
 export class ExecutionLogger<T = string> {
     private messagesListeners = new Set<ExecutionLogger.Listener<T>>();
-    private loggedMessages: T[] = [];
 
     onMessage(func: ExecutionLogger.Listener<T>): this {
         this.messagesListeners.add(func);
@@ -8,15 +9,16 @@ export class ExecutionLogger<T = string> {
     }
 
     log(message: T): this {
-        this.loggedMessages.push(message);
         for (const listener of this.messagesListeners) {
             listener(message);
         }
         return this;
     }
 
-    get messages(): readonly T[] {
-        return this.loggedMessages;
+    bufferMessages(max: number = Number.POSITIVE_INFINITY) {
+        const buffer = new MessagesBuffer<T>(max);
+        buffer.attachToLogger(this);
+        return buffer;
     }
 
     static create<T>(listener?: ExecutionLogger.Listener<T>) {

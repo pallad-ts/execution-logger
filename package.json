@@ -1,6 +1,6 @@
 {
   "name": "@pallad/execution-logger",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "",
   "main": "compiled/index.js",
   "types": "compiled/index.d.ts",
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/pallad-ts/execution-logger#readme",
   "devDependencies": {
-    "@pallad/scripts": "^1.1.4",
-    "@types/node": "^13.13.4"
+    "@faker-js/faker": "^6.1.1",
+    "@pallad/scripts": "^2",
+    "@types/node": "^14"
   }
 }
